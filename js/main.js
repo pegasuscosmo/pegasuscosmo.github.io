@@ -9,6 +9,21 @@ navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('open'));
 });
 
+// Dialogs (dev story, etc.)
+document.querySelectorAll('[data-open-dialog]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById(btn.dataset.openDialog)?.showModal();
+  });
+});
+document.querySelectorAll('[data-close-dialog]').forEach(btn => {
+  btn.addEventListener('click', () => btn.closest('dialog')?.close());
+});
+document.querySelectorAll('dialog').forEach(dialog => {
+  dialog.addEventListener('click', e => {
+    if (e.target === dialog) dialog.close();
+  });
+});
+
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 

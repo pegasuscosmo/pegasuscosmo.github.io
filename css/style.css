@@ -274,11 +274,86 @@ h1 {
   flex-shrink: 0;
   font-size: 0.85rem;
   font-weight: 600;
+  font-family: inherit;
   color: var(--accent);
   text-decoration: none;
   white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 .category-extra-link:hover { text-decoration: underline; }
+
+/* Dev story dialog */
+dialog.story-dialog {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: 0;
+  width: min(680px, 90vw);
+  max-height: 82vh;
+}
+dialog.story-dialog::backdrop {
+  background: rgba(5, 6, 15, 0.75);
+  backdrop-filter: blur(4px);
+}
+.story-dialog-inner {
+  padding: 2.5rem;
+  overflow-y: auto;
+  max-height: 82vh;
+  position: relative;
+}
+.dialog-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+.dialog-close:hover { color: var(--text); }
+.dialog-eyebrow {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+}
+.story-dialog-inner h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.35;
+  margin: 0 0 1.25rem;
+  padding-right: 1.5rem;
+}
+.story-dialog-inner p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin: 0 0 1.1rem;
+}
+.story-dialog-inner code {
+  background: rgba(255,255,255,0.06);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+.story-dialog-inner a { color: var(--accent); }
+.story-dialog-inner blockquote {
+  margin: 0 0 1.1rem;
+  padding: 0.9rem 1.25rem;
+  border-left: 2px solid var(--accent-2);
+  background: rgba(255,255,255,0.03);
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.story-dialog-inner blockquote strong { color: var(--accent-2); }
 
 .timeline {
   list-style: none;
@@ -403,6 +478,7 @@ h1 {
   .category-head { gap: 0.85rem; }
   .category-extra-link { margin-left: 0; flex-basis: 100%; }
   .category-single-body { margin-left: 0; margin-top: 0.5rem; }
+  .story-dialog-inner { padding: 1.75rem; }
   .nav-links {
     position: fixed;
     top: 68px;

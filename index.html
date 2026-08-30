@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
@@ -99,7 +99,7 @@
               <h3>N-Body Simulations</h3>
               <p>Simulating how large numbers of bodies pull on each other under gravity &mdash; from a first pure-Python attempt to a GPU-parallel version handling millions of particles.</p>
             </div>
-            <a class="category-extra-link" href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Nbody/.Dev%20doc%20NBody" target="_blank" rel="noopener">Dev Story ↗</a>
+            <button type="button" class="category-extra-link" data-open-dialog="devStoryDialog" aria-haspopup="dialog">Read the Dev Story &rarr;</button>
           </div>
 
           <ol class="timeline">
@@ -284,10 +284,83 @@
   </section>
 </main>
 
+<dialog id="devStoryDialog" class="story-dialog">
+  <div class="story-dialog-inner">
+    <button type="button" class="dialog-close" data-close-dialog aria-label="Close">&times;</button>
+    <p class="dialog-eyebrow">Dev Story &middot; N-Body Simulations</p>
+    <h3>How I Broke (and Fixed) a 2-Million-Particle Galaxy Sim</h3>
+    <p>
+      I started making N-body sims after watching
+      <a href="https://www.youtube.com/watch?v=nZHjD3cI-EU" target="_blank" rel="noopener">Deadlock's video on the Barnes&ndash;Hut algorithm</a>.
+      My first attempt was pure Python: an object-based tree built with recursive division. It
+      was incredibly slow, and the high theta I needed just to get playable performance
+      introduced a lot of visual artifacts.
+    </p>
+    <p>
+      After discovering Taichi, I took a more parallel approach. A lot of the later work
+      happened in my AP Computer Science Principles class, for the AP performance task. I built
+      a binary radix tree, since it's friendly to both storage and speed &mdash; it can be
+      constructed entirely in parallel and always has exactly 2N&minus;1 nodes, which mattered
+      because Taichi's dynamically sized fields are extremely slow. Getting there needed sorted
+      Morton codes, and after failing to write my own radix sort a few times, I fell back on
+      Taichi's built-in <code>parallel_sort()</code>.
+    </p>
+    <p>
+      From there, computing forces was relatively easy. I added a density-based visualizer by
+      accumulating a value into each pixel a particle occupied (and its neighbors), then mapping
+      that to brightness and color. At around 100,000 particles at 20fps, I submitted it for the
+      AP Performance Task.
+    </p>
+    <p>
+      I then took a break to build Ring Sim 2 for a game jam. In late July I came back,
+      unsatisfied with the performance &mdash; largely because Deadlock's video showed a
+      simulation running millions of particles. Profiling showed the Morton-code sort I was
+      using &mdash; a modified even-odd sort with 190 serial stages &mdash; was taking hundreds
+      of milliseconds at high N. So I went back to writing my own radix sort. This time it
+      worked: ~26ms to sort N=1,000,000. Plugged into the sim, I was now running 500,000
+      particles at a solid framerate.
+    </p>
+    <p>
+      Encouraged, I pushed for more. At N=1,000,000, gravity just&hellip; turned off. No errors,
+      no visible NaNs, nothing wrong in the force or tree code that I could find. I let it sit
+      for a while.
+    </p>
+    <blockquote>
+      When I showed my family the simulation, my sister asked how far I could push it. When I
+      said something broke at 1,000,000, she suggested we find the exact number. A manual binary
+      search later, we had it: <strong>N&nbsp;=&nbsp;809,551</strong>.
+    </blockquote>
+    <p>
+      Digging in, I found a NaN in the root node's mass, traced down to a child with a NaN'd
+      position. It turned out Taichi's <code>random()</code> is deterministic &mdash; the same
+      seed and parameters always place a given particle in the exact same spot. At exactly
+      N=809,551, it happened to return (0, 0) for one particle's position. A faulty
+      <code>while</code> loop check let that slip through, putting a particle exactly at the
+      center. Computing its velocity meant dividing by its distance from center &mdash; zero
+      &mdash; which produced a NaN that infected the whole tree: every center-of-mass comparison
+      involving that node returned false, which, in effect, turned gravity off.
+    </p>
+    <p>
+      A second bug showed up once I gave galaxies their own bulk velocities: their cores were
+      pinned in place, unable to move. The cause was a Verlet position half-step happening
+      <em>after</em> the tree was built each frame, letting particles (and even galaxy cores)
+      gravitate toward their own past positions &mdash; and in a dense enough region, that
+      overpowered every other force. Moving the half-step to before tree construction fixed it.
+    </p>
+    <p>
+      After all that, I broke the 1,000,000-particle barrier. It now runs at roughly 15fps with
+      N=2,000,000, with frame time scaling close to the expected O(n&nbsp;log&nbsp;n)
+      (<a href="https://www.desmos.com/calculator/xfcfxqrpbl" target="_blank" rel="noopener">see the curve fit</a>).
+      I learned a lot along the way &mdash; parallel algorithms, working directly with the GPU,
+      and more about how 2D gravity actually behaves than I expected going in.
+    </p>
+  </div>
+</dialog>
+
 <footer class="site-footer">
   <p>&copy; <span id="year"></span> Pegasus Cosmo &middot; Built with curiosity and a lot of GPU cycles.</p>
 </footer>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=2"></script>
 </body>
 </html>
