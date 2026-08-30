@@ -74,97 +74,176 @@
   <section id="projects" class="section section-alt">
     <div class="container">
       <h2 class="section-title"><span class="section-num">02</span> Projects</h2>
-      <p class="section-lede">Each project below is real, working code — click through to see it on GitHub.</p>
+      <p class="section-lede">
+        Grouped by area of physics &mdash; several went through multiple versions as I learned
+        more. Each entry links straight to the real code on GitHub.
+      </p>
 
-      <div class="project-grid">
+      <div class="category-list">
 
-        <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="32" cy="32" r="2" fill="currentColor" stroke="none"/>
-              <path d="M32 32 L14 20 M32 32 L50 44 M32 32 L48 18 M32 32 L16 46 M32 32 L8 32 M32 32 L56 32"/>
-              <circle cx="14" cy="20" r="1.6" fill="currentColor" stroke="none"/>
-              <circle cx="50" cy="44" r="1.6" fill="currentColor" stroke="none"/>
-              <circle cx="48" cy="18" r="1.6" fill="currentColor" stroke="none"/>
-              <circle cx="16" cy="46" r="1.6" fill="currentColor" stroke="none"/>
-              <circle cx="8" cy="32" r="1.2" fill="currentColor" stroke="none"/>
-              <circle cx="56" cy="32" r="1.2" fill="currentColor" stroke="none"/>
-            </g></svg>
+        <article class="category-panel">
+          <div class="category-head">
+            <div class="category-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="32" cy="32" r="2" fill="currentColor" stroke="none"/>
+                <path d="M32 32 L14 20 M32 32 L50 44 M32 32 L48 18 M32 32 L16 46 M32 32 L8 32 M32 32 L56 32"/>
+                <circle cx="14" cy="20" r="1.6" fill="currentColor" stroke="none"/>
+                <circle cx="50" cy="44" r="1.6" fill="currentColor" stroke="none"/>
+                <circle cx="48" cy="18" r="1.6" fill="currentColor" stroke="none"/>
+                <circle cx="16" cy="46" r="1.6" fill="currentColor" stroke="none"/>
+                <circle cx="8" cy="32" r="1.2" fill="currentColor" stroke="none"/>
+                <circle cx="56" cy="32" r="1.2" fill="currentColor" stroke="none"/>
+              </g></svg>
+            </div>
+            <div class="category-title-group">
+              <h3>N-Body Simulations</h3>
+              <p>Simulating how large numbers of bodies pull on each other under gravity &mdash; from a first pure-Python attempt to a GPU-parallel version handling millions of particles.</p>
+            </div>
+            <a class="category-extra-link" href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Nbody/.Dev%20doc%20NBody" target="_blank" rel="noopener">Dev Story ↗</a>
           </div>
-          <h3>Barnes&ndash;Hut N-Body Simulator</h3>
-          <p class="project-tags">Python &middot; Taichi (GPU) &middot; Parallel Algorithms</p>
-          <p>
-            Simulates gravity between up to <strong>2,000,000 particles</strong> in real time by
-            building a binary radix tree entirely on the GPU each frame &mdash; encoding positions
-            as Morton codes, sorting them with a custom parallel radix sort, and deriving the
-            Barnes-Hut tree structure directly from the sorted codes. Includes density, velocity,
-            and hybrid visualization modes.
-          </p>
-          <div class="project-links">
-            <a href="https://github.com/pegasuscosmo/Gravity-Simulations/tree/main/Nbody" target="_blank" rel="noopener">Code ↗</a>
-            <a href="https://www.youtube.com/watch?v=dekreIWrQXQ" target="_blank" rel="noopener">2M-Particle Demo ↗</a>
+
+          <ol class="timeline">
+            <li class="timeline-item">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <h4>N-Body Sim</h4>
+              <p class="project-tags">Python &middot; Barnes&ndash;Hut Algorithm &middot; Velocity Verlet</p>
+              <p>
+                My first version: randomly generated bodies pulling on each other under gravity,
+                using the Barnes&ndash;Hut algorithm to cut down on calculations and velocity
+                Verlet integration for accuracy. Quickly put together and not at all
+                optimized &mdash; but it worked, and it's what taught me the algorithm.
+              </p>
+              <div class="project-links">
+                <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Nbody/NbodySim.py" target="_blank" rel="noopener">Code ↗</a>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <h4>Barnes&ndash;Hut N-Body (Optimized)</h4>
+              <p class="project-tags">Python &middot; Taichi (GPU) &middot; Custom Parallel Radix Sort</p>
+              <p>
+                A full rebuild for parallelism: up to <strong>2,000,000 particles</strong> in real
+                time by encoding positions as Morton codes, sorting them with a radix sort I wrote
+                myself, and building the Barnes&ndash;Hut tree directly from the sorted codes on
+                the GPU every frame. Includes density, velocity, and hybrid visualization modes,
+                plus recording to 60fps MP4.
+              </p>
+              <div class="project-links">
+                <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Nbody/BarnesHutNBodySim.py" target="_blank" rel="noopener">Code ↗</a>
+                <a href="https://www.youtube.com/watch?v=dekreIWrQXQ" target="_blank" rel="noopener">2M-Particle Demo ↗</a>
+              </div>
+            </li>
+          </ol>
+        </article>
+
+        <article class="category-panel">
+          <div class="category-head">
+            <div class="category-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="32" cy="32" r="9" fill="currentColor" stroke="none"/>
+                <ellipse cx="32" cy="32" rx="26" ry="8"/>
+                <ellipse cx="32" cy="32" rx="20" ry="6"/>
+              </g></svg>
+            </div>
+            <div class="category-title-group">
+              <h3>Planetary Ring Simulations</h3>
+              <p>Modeling how moons gravitationally sculpt planetary rings &mdash; three passes, each more physically accurate or more scalable than the last.</p>
+            </div>
+          </div>
+
+          <ol class="timeline">
+            <li class="timeline-item">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <h4>Ring Sim</h4>
+              <p class="project-tags">Python &middot; Velocity Verlet</p>
+              <p>
+                Simulates moons' gravitational effect on ring particles with stable orbits, time
+                warp, random generation/resets, trajectory drawing, and interactive body
+                creation &mdash; click and hold to spawn a body, then tune its mass, size, and
+                velocity before releasing it into the system.
+              </p>
+              <div class="project-links">
+                <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Ringsim/Ring%20Sim.py" target="_blank" rel="noopener">Code ↗</a>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <h4>Ring Sim 2</h4>
+              <p class="project-tags">Python &middot; Taichi (GPU)</p>
+              <p>
+                A remake using Taichi for GPU parallelism, supporting far higher particle counts,
+                with a revamped UI and run-time editing of the simulation parameters.
+              </p>
+              <div class="project-links">
+                <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Ringsim/Ring%20Sim%202.py" target="_blank" rel="noopener">Code ↗</a>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <h4>Saturn Ring Sim</h4>
+              <p class="project-tags">Python &middot; Taichi (GPU) &middot; Wisdom&ndash;Holman Integration</p>
+              <p>
+                Models Saturn's actual rings using <strong>Wisdom&ndash;Holman symplectic
+                integration</strong> &mdash; propagating Kepler orbits with Lagrange coefficients
+                for extreme long-term orbital stability &mdash; plus statistical
+                particle-particle collisions and a live plot of radial ring density.
+              </p>
+              <div class="project-links">
+                <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Ringsim/Saturn%20Ring%20Sim.py" target="_blank" rel="noopener">Code ↗</a>
+              </div>
+            </li>
+          </ol>
+        </article>
+
+        <article class="category-panel category-panel-single">
+          <div class="category-head">
+            <div class="category-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
+                <ellipse cx="32" cy="34" rx="27" ry="9"/>
+                <circle cx="32" cy="32" r="10" fill="currentColor" stroke="none"/>
+                <circle cx="32" cy="32" r="14"/>
+              </g></svg>
+            </div>
+            <div class="category-title-group">
+              <h3>Black Hole Renderer</h3>
+              <p>I was making black hole art and thought, "hey, I could code this" &mdash; so I did.</p>
+            </div>
+          </div>
+          <div class="category-single-body">
+            <p class="project-tags">Python &middot; Ray Tracing &middot; Relativistic Physics</p>
+            <p>
+              A from-scratch ray tracer that bends light around a black hole using
+              <code>a = pos&middot;(3M&middot;h&sup2;)/r&#8309;</code> in place of Newtonian
+              gravity, rendering a textured accretion disk. Exports separate layers &mdash; event
+              horizon, full render, and luminosity masks &mdash; for compositing. Currently
+              working on a procedural noise texture to replace the image-based one.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Balck%20Hole%20Renderer%20V1" target="_blank" rel="noopener">Code ↗</a>
+            </div>
           </div>
         </article>
 
-        <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="32" cy="32" r="9" fill="currentColor" stroke="none"/>
-              <ellipse cx="32" cy="32" rx="26" ry="8"/>
-              <ellipse cx="32" cy="32" rx="20" ry="6"/>
-            </g></svg>
+        <article class="category-panel category-panel-single category-panel-soon">
+          <div class="category-head">
+            <div class="category-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M32 6 C42 16 44 30 40 42 L24 42 C20 30 22 16 32 6 Z"/>
+                <path d="M24 42 L18 54 L26 50 Z M40 42 L46 54 L38 50 Z"/>
+                <circle cx="32" cy="24" r="4"/>
+              </g></svg>
+            </div>
+            <div class="category-title-group">
+              <h3>Rocketry &mdash; National Finalist</h3>
+              <p>Member of a rocketry team that advanced to the national level.</p>
+            </div>
           </div>
-          <h3>Planetary Ring Simulations</h3>
-          <p class="project-tags">Python &middot; Taichi (GPU) &middot; Orbital Mechanics</p>
-          <p>
-            A series of simulators modeling how moons gravitationally sculpt planetary rings,
-            with interactive body creation, time-warp, and trajectory drawing. The latest version
-            models Saturn's rings using <strong>Wisdom&ndash;Holman symplectic integration</strong>
-            (propagating Kepler orbits with Lagrange coefficients) for long-term orbital stability,
-            plus statistical particle-particle collisions.
-          </p>
-          <div class="project-links">
-            <a href="https://github.com/pegasuscosmo/Gravity-Simulations/tree/main/Ringsim" target="_blank" rel="noopener">Code ↗</a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
-              <ellipse cx="32" cy="34" rx="27" ry="9"/>
-              <circle cx="32" cy="32" r="10" fill="currentColor" stroke="none"/>
-              <circle cx="32" cy="32" r="14"/>
-            </g></svg>
-          </div>
-          <h3>Black Hole Renderer</h3>
-          <p class="project-tags">Python &middot; Ray Tracing &middot; Relativistic Physics</p>
-          <p>
-            A from-scratch ray tracer that bends light around a black hole using
-            <code>a = pos&middot;(3M&middot;h&sup2;)/r&#8309;</code> instead of Newtonian gravity, rendering
-            a textured accretion disk. Exports separate layers &mdash; event horizon, full render,
-            and luminosity masks &mdash; for compositing.
-          </p>
-          <div class="project-links">
-            <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Balck%20Hole%20Renderer%20V1" target="_blank" rel="noopener">Code ↗</a>
-          </div>
-        </article>
-
-        <article class="project-card project-card-soon">
-          <div class="project-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M32 6 C42 16 44 30 40 42 L24 42 C20 30 22 16 32 6 Z"/>
-              <path d="M24 42 L18 54 L26 50 Z M40 42 L46 54 L38 50 Z"/>
-              <circle cx="32" cy="24" r="4"/>
-            </g></svg>
-          </div>
-          <h3>Rocketry &mdash; National Finalist</h3>
-          <p class="project-tags">Team Project &middot; Aerospace Engineering</p>
-          <p>
-            Member of a rocketry team that advanced to the national level. Write-up, design
-            files, and flight data coming soon.
-          </p>
-          <div class="project-links">
-            <span class="coming-soon">Coming soon</span>
+          <div class="category-single-body">
+            <p class="project-tags">Team Project &middot; Aerospace Engineering</p>
+            <p>Write-up, design files, and flight data coming soon.</p>
+            <div class="project-links">
+              <span class="coming-soon">Coming soon</span>
+            </div>
           </div>
         </article>
 
