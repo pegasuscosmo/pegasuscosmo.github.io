@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pegasus Cosmo — Astrophysics &amp; Space Engineering Portfolio</title>
+<meta name="description" content="Portfolio of an aspiring astrophysicist: GPU-accelerated N-body simulations, orbital mechanics, black hole ray tracing, and rocketry.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪐</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<header class="site-header">
+  <nav class="nav container">
+    <a href="#top" class="logo">PEGASUS<span>COSMO</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="top" class="hero">
+    <div class="hero-content container">
+      <p class="eyebrow">Aspiring Astrophysicist &middot; High School Student</p>
+      <h1>Building tomorrow's<br><span class="gradient-text">space science</span>, today.</h1>
+      <p class="hero-sub">
+        I'm a high schooler who codes GPU-accelerated physics simulations for fun — from
+        two-million-particle galaxy mergers to black hole ray tracing — on my way to studying
+        astrophysics and, one day, working at NASA.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View My Projects</a>
+        <a href="https://github.com/pegasuscosmo" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">scroll</div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title"><span class="section-num">01</span> About Me</h2>
+      <div class="about-grid">
+        <p class="about-text">
+          Hi, I'm a high school student with a serious space obsession. It started with watching videos
+          on orbital mechanics and the Barnes-Hut algorithm, and turned into teaching myself
+          GPU-parallel programming to simulate physics most people only see in textbooks —
+          galaxy formation, planetary rings, and the bending of light near a black hole.
+          I'm also part of a rocketry team that competed at the national level. My goal is to
+          study astrophysics in college and eventually contribute to space exploration at NASA.
+        </p>
+        <ul class="about-facts">
+          <li><span class="fact-label">Focus</span><span>Astrophysics &amp; Orbital Mechanics</span></li>
+          <li><span class="fact-label">Tools</span><span>Python, Taichi (GPU), NumPy</span></li>
+          <li><span class="fact-label">Also on</span><span>National-level Rocketry Team</span></li>
+          <li><span class="fact-label">Goal</span><span>Study Astrophysics &rarr; NASA</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title"><span class="section-num">02</span> Projects</h2>
+      <p class="section-lede">Each project below is real, working code — click through to see it on GitHub.</p>
+
+      <div class="project-grid">
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="32" cy="32" r="2" fill="currentColor" stroke="none"/>
+              <path d="M32 32 L14 20 M32 32 L50 44 M32 32 L48 18 M32 32 L16 46 M32 32 L8 32 M32 32 L56 32"/>
+              <circle cx="14" cy="20" r="1.6" fill="currentColor" stroke="none"/>
+              <circle cx="50" cy="44" r="1.6" fill="currentColor" stroke="none"/>
+              <circle cx="48" cy="18" r="1.6" fill="currentColor" stroke="none"/>
+              <circle cx="16" cy="46" r="1.6" fill="currentColor" stroke="none"/>
+              <circle cx="8" cy="32" r="1.2" fill="currentColor" stroke="none"/>
+              <circle cx="56" cy="32" r="1.2" fill="currentColor" stroke="none"/>
+            </g></svg>
+          </div>
+          <h3>Barnes&ndash;Hut N-Body Simulator</h3>
+          <p class="project-tags">Python &middot; Taichi (GPU) &middot; Parallel Algorithms</p>
+          <p>
+            Simulates gravity between up to <strong>2,000,000 particles</strong> in real time by
+            building a binary radix tree entirely on the GPU each frame &mdash; encoding positions
+            as Morton codes, sorting them with a custom parallel radix sort, and deriving the
+            Barnes-Hut tree structure directly from the sorted codes. Includes density, velocity,
+            and hybrid visualization modes.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/pegasuscosmo/Gravity-Simulations/tree/main/Nbody" target="_blank" rel="noopener">Code ↗</a>
+            <a href="https://www.youtube.com/watch?v=dekreIWrQXQ" target="_blank" rel="noopener">2M-Particle Demo ↗</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="32" cy="32" r="9" fill="currentColor" stroke="none"/>
+              <ellipse cx="32" cy="32" rx="26" ry="8"/>
+              <ellipse cx="32" cy="32" rx="20" ry="6"/>
+            </g></svg>
+          </div>
+          <h3>Planetary Ring Simulations</h3>
+          <p class="project-tags">Python &middot; Taichi (GPU) &middot; Orbital Mechanics</p>
+          <p>
+            A series of simulators modeling how moons gravitationally sculpt planetary rings,
+            with interactive body creation, time-warp, and trajectory drawing. The latest version
+            models Saturn's rings using <strong>Wisdom&ndash;Holman symplectic integration</strong>
+            (propagating Kepler orbits with Lagrange coefficients) for long-term orbital stability,
+            plus statistical particle-particle collisions.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/pegasuscosmo/Gravity-Simulations/tree/main/Ringsim" target="_blank" rel="noopener">Code ↗</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
+              <ellipse cx="32" cy="34" rx="27" ry="9"/>
+              <circle cx="32" cy="32" r="10" fill="currentColor" stroke="none"/>
+              <circle cx="32" cy="32" r="14"/>
+            </g></svg>
+          </div>
+          <h3>Black Hole Renderer</h3>
+          <p class="project-tags">Python &middot; Ray Tracing &middot; Relativistic Physics</p>
+          <p>
+            A from-scratch ray tracer that bends light around a black hole using
+            <code>a = pos&middot;(3M&middot;h&sup2;)/r&#8309;</code> instead of Newtonian gravity, rendering
+            a textured accretion disk. Exports separate layers &mdash; event horizon, full render,
+            and luminosity masks &mdash; for compositing.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Balck%20Hole%20Renderer%20V1" target="_blank" rel="noopener">Code ↗</a>
+          </div>
+        </article>
+
+        <article class="project-card project-card-soon">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M32 6 C42 16 44 30 40 42 L24 42 C20 30 22 16 32 6 Z"/>
+              <path d="M24 42 L18 54 L26 50 Z M40 42 L46 54 L38 50 Z"/>
+              <circle cx="32" cy="24" r="4"/>
+            </g></svg>
+          </div>
+          <h3>Rocketry &mdash; National Finalist</h3>
+          <p class="project-tags">Team Project &middot; Aerospace Engineering</p>
+          <p>
+            Member of a rocketry team that advanced to the national level. Write-up, design
+            files, and flight data coming soon.
+          </p>
+          <div class="project-links">
+            <span class="coming-soon">Coming soon</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="videos" class="section">
+    <div class="container">
+      <h2 class="section-title"><span class="section-num">03</span> Videos</h2>
+      <p class="section-lede">
+        I'm starting a YouTube channel to walk through how these simulations work, and to explain
+        space &amp; physics concepts for other student enthusiasts. First videos coming soon &mdash;
+        subscribe to catch them early.
+      </p>
+      <div class="video-placeholder">
+        <div class="video-placeholder-inner">
+          <span class="play-icon" aria-hidden="true">&#9658;</span>
+          <p>Channel launching soon</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title"><span class="section-num">04</span> Get In Touch</h2>
+      <p class="section-lede">
+        Interested in the projects, or want to collaborate? Reach out &mdash; I'm Sathvik, the
+        person behind Pegasus Cosmo.
+      </p>
+      <div class="contact-links">
+        <a href="https://github.com/pegasuscosmo" target="_blank" rel="noopener" class="contact-pill">GitHub</a>
+        <a href="#" target="_blank" rel="noopener" class="contact-pill contact-pending">YouTube (coming soon)</a>
+        <a href="mailto:sathvik.nair@outlook.com" class="contact-pill">Email</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>&copy; <span id="year"></span> Pegasus Cosmo &middot; Built with curiosity and a lot of GPU cycles.</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
