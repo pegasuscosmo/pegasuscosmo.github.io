@@ -475,7 +475,7 @@ dialog.story-dialog::backdrop {
 @media (max-width: 780px) {
   .about-grid { grid-template-columns: 1fr; }
   .category-panel { padding: 1.5rem; }
-  .category-head { gap: 0.85rem; }
+  .category-head { gap: 0.85rem; flex-wrap: wrap; }
   .category-extra-link { margin-left: 0; flex-basis: 100%; }
   .category-single-body { margin-left: 0; margin-top: 0.5rem; }
   .story-dialog-inner { padding: 1.75rem; }
