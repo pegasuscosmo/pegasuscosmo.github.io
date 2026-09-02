@@ -97,7 +97,7 @@
             </div>
             <div class="category-title-group">
               <h3>N-Body Simulations</h3>
-              <p>Simulating how large numbers of bodies pull on each other under gravity &mdash; from a first pure-Python attempt to a GPU-parallel version handling millions of particles.</p>
+              <p>The N-Body problem is a general problem where particles are affected by every other particle, with forces that depend on their positions, the problem being that there is no analytical solution. In astrophysics, the most common application of N-Body is gravity.</p>
             </div>
             <button type="button" class="category-extra-link" data-open-dialog="devStoryDialog" aria-haspopup="dialog">Read the Dev Story &rarr;</button>
           </div>
@@ -108,10 +108,7 @@
               <h4>N-Body Sim</h4>
               <p class="project-tags">Python &middot; Barnes&ndash;Hut Algorithm &middot; Velocity Verlet</p>
               <p>
-                My first version: randomly generated bodies pulling on each other under gravity,
-                using the Barnes&ndash;Hut algorithm to cut down on calculations and velocity
-                Verlet integration for accuracy. Quickly put together and not at all
-                optimized &mdash; but it worked, and it's what taught me the algorithm.
+                My first version of an implementation of the Barnes-Hut algorithm, an N-Body algorithm that speeds up computation time from scaling by N^2 to N*log(N). Using a simple Verlet integrator to keep stability and accuracy cheaply. Made in pure python and not very optimized, more of a proof of concept, able to run a couple thousand particles at reasonable frame rates.
               </p>
               <div class="project-links">
                 <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Nbody/NbodySim.py" target="_blank" rel="noopener">Code ↗</a>
@@ -119,14 +116,10 @@
             </li>
             <li class="timeline-item">
               <span class="timeline-dot" aria-hidden="true"></span>
-              <h4>Barnes&ndash;Hut N-Body (Optimized)</h4>
+              <h4>BH N-Body</h4>
               <p class="project-tags">Python &middot; Taichi (GPU) &middot; Custom Parallel Radix Sort</p>
               <p>
-                A full rebuild for parallelism: up to <strong>2,000,000 particles</strong> in real
-                time by encoding positions as Morton codes, sorting them with a radix sort I wrote
-                myself, and building the Barnes&ndash;Hut tree directly from the sorted codes on
-                the GPU every frame. Includes density, velocity, and hybrid visualization modes,
-                plus recording to 60fps MP4.
+                A multiple months-long project using the GPU and parallel algorithms to maximize performance. While the physics and integration remained the same, the increased performance allows for millions of particles. Comes with multiple visualizer modes and a built in recorder.
               </p>
               <div class="project-links">
                 <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Nbody/BarnesHutNBodySim.py" target="_blank" rel="noopener">Code ↗</a>
@@ -147,20 +140,17 @@
             </div>
             <div class="category-title-group">
               <h3>Planetary Ring Simulations</h3>
-              <p>Modeling how moons gravitationally sculpt planetary rings &mdash; three passes, each more physically accurate or more scalable than the last.</p>
+              <p>Rings are very complex systems where orbital resonance and collisions dominate.</p>
             </div>
           </div>
 
           <ol class="timeline">
             <li class="timeline-item">
               <span class="timeline-dot" aria-hidden="true"></span>
-              <h4>Ring Sim</h4>
+              <h4>Ring Sim V1</h4>
               <p class="project-tags">Python &middot; Velocity Verlet</p>
               <p>
-                Simulates moons' gravitational effect on ring particles with stable orbits, time
-                warp, random generation/resets, trajectory drawing, and interactive body
-                creation &mdash; click and hold to spawn a body, then tune its mass, size, and
-                velocity before releasing it into the system.
+                Simulate the gravity of moons on thousands of ring particles. Has time warp, random generation, trajectories, and body creation. Uses Verlet integration for simplicity and stability during SOI changes.
               </p>
               <div class="project-links">
                 <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Ringsim/Ring%20Sim.py" target="_blank" rel="noopener">Code ↗</a>
@@ -168,11 +158,10 @@
             </li>
             <li class="timeline-item">
               <span class="timeline-dot" aria-hidden="true"></span>
-              <h4>Ring Sim 2</h4>
+              <h4>Ring Sim V2</h4>
               <p class="project-tags">Python &middot; Taichi (GPU)</p>
               <p>
-                A remake using Taichi for GPU parallelism, supporting far higher particle counts,
-                with a revamped UI and run-time editing of the simulation parameters.
+                A remake of the V1 using the GPU to support millions of particles, along with better UI and a run-time generation editor. Uses Verlet integration for simplicity and stability during SOI changes.
               </p>
               <div class="project-links">
                 <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Ringsim/Ring%20Sim%202.py" target="_blank" rel="noopener">Code ↗</a>
@@ -183,10 +172,7 @@
               <h4>Saturn Ring Sim</h4>
               <p class="project-tags">Python &middot; Taichi (GPU) &middot; Wisdom&ndash;Holman Integration</p>
               <p>
-                Models Saturn's actual rings using <strong>Wisdom&ndash;Holman symplectic
-                integration</strong> &mdash; propagating Kepler orbits with Lagrange coefficients
-                for extreme long-term orbital stability &mdash; plus statistical
-                particle-particle collisions and a live plot of radial ring density.
+                An attempt to simulate Saturn&rsquo;s rings using Wisdom Holman integration for long-term orbital stability and statistical collisions. Also has a radial density plot.
               </p>
               <div class="project-links">
                 <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Ringsim/Saturn%20Ring%20Sim.py" target="_blank" rel="noopener">Code ↗</a>
@@ -205,19 +191,16 @@
               </g></svg>
             </div>
             <div class="category-title-group">
-              <h3>Black Hole Renderer</h3>
-              <p>I was making black hole art and thought, "hey, I could code this" &mdash; so I did.</p>
+              <h3>Black Hole Renderer (WIP)</h3>
+              <p>I was making some black hole art and went "Hey I could code this"</p>
             </div>
           </div>
           <div class="category-single-body">
             <p class="project-tags">Python &middot; Ray Tracing &middot; Relativistic Physics</p>
             <p>
-              A from-scratch ray tracer that bends light around a black hole using
-              <code>a = pos&middot;(3M&middot;h&sup2;)/r&#8309;</code> in place of Newtonian
-              gravity, rendering a textured accretion disk. Exports separate layers &mdash; event
-              horizon, full render, and luminosity masks &mdash; for compositing. Currently
-              working on a procedural noise texture to replace the image-based one.
+              A ray tracer to simulate how black holes look using relativistic forces to bend light more accurately. Exports the render in several layers. Uses Verlet integration for simplicity.
             </p>
+            <p>Planned/WIP: Procedural noise, RK integration</p>
             <div class="project-links">
               <a href="https://github.com/pegasuscosmo/Gravity-Simulations/blob/main/Balck%20Hole%20Renderer%20V1" target="_blank" rel="noopener">Code ↗</a>
             </div>
